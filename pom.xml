@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>net.sf.jsptest</groupId>
+	<groupId>com.github.lkoskela.jsptest</groupId>
 	<artifactId>jsptest</artifactId>
 	<version>0.21-SNAPSHOT</version>
 	<name>JspTest root project</name>
 	<description>This POM acts as a virtual root for the set of JSP version-specific combinations of the contained subprojects.</description>
 	<packaging>pom</packaging>
-	<url>http://jsptest.sourceforge.net</url>
+	<url>http://github.com/jsptest/jsptest</url>
 	<inceptionYear>2006</inceptionYear>
 	<organization>
 		<name>JspTest developers</name>
-		<url>http://jsptest.sourceforge.net</url>
+		<url>http://github.com/jsptest/jsptest</url>
 	</organization>
 	<licenses>
 		<license>
@@ -21,22 +21,24 @@
 		</license>
 	</licenses>
 	<issueManagement>
-		<system>sourceforge</system>
-		<url>http://sourceforge.net/tracker/?group_id=164388</url>
+		<system>github</system>
+		<url>https://github.com/jsptest/jsptest/issues</url>
 	</issueManagement>
+	<scm>
+		<url>https://github.com/jsptest/jsptest</url>
+		<connection>scm:git:git://github.com/jsptest/jsptest.git</connection>
+		<developerConnection>scm:git:git@github.com:jsptest/jsptest.git</developerConnection>
+	</scm>
 	<distributionManagement>
 		<repository>
-			<id>jsptest.sourceforge.net</id>
-			<name>JspTest Maven2 repository at SourceForge</name>
-			<url>scp://shell.sourceforge.net:/home/groups/j/js/jsptest/htdocs/maven2</url>
+			<id>sonatype-nexus-staging</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
 		</repository>
+		<snapshotRepository>
+			<id>sonatype-nexus-snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
 	</distributionManagement>
-	<scm>
-		<connection>scm:svn:https://jsptest.svn.sourceforge.net/svnroot/jsptest/trunk</connection>
-		<developerConnection>scm:svn:https://jsptest.svn.sourceforge.net/svnroot/jsptest/trunk</developerConnection>
-		<url>http://jsptest.svn.sourceforge.net/viewvc/jsptest/trunk</url>
-	</scm>
-	<mailingLists />
 	<developers>
 		<developer>
 			<name>Lasse Koskela</name>
@@ -44,6 +46,10 @@
 			<email>lkoskela@users.sf.net</email>
 		</developer>
 	</developers>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
 	<modules>
 		<module>jsptest-generic</module>
 		<module>jsptest-jsp12</module>
@@ -76,32 +82,32 @@
 				<version>1.2.13</version>
 			</dependency>
 			<dependency>
-				<groupId>net.sf.jsptest</groupId>
+				<groupId>com.github.lkoskela.jsptest</groupId>
 				<artifactId>jsptest-jsp12</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>net.sf.jsptest</groupId>
+				<groupId>com.github.lkoskela.jsptest</groupId>
 				<artifactId>jsptest-jsp20</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>net.sf.jsptest</groupId>
+				<groupId>com.github.lkoskela.jsptest</groupId>
 				<artifactId>jsptest-jsp21</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>net.sf.jsptest</groupId>
+				<groupId>com.github.lkoskela.jsptest</groupId>
 				<artifactId>jsptest-common</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>net.sf.jsptest</groupId>
+				<groupId>com.github.lkoskela.jsptest</groupId>
 				<artifactId>jsptest-compiler-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>net.sf.jsptest</groupId>
+				<groupId>com.github.lkoskela.jsptest</groupId>
 				<artifactId>jsptest-framework</artifactId>
 				<version>${project.version}</version>
 			</dependency>
@@ -231,7 +237,6 @@
 						<reports>
 							<report>dependencies</report>
 							<report>project-team</report>
-							<report>mailing-list</report>
 							<report>issue-tracking</report>
 							<report>license</report>
 							<report>scm</report>
@@ -256,4 +261,33 @@
 			</plugin>
 		</plugins>
 	</reporting>
+	<profiles>
+		<profile>
+			<id>release-sign-artifacts</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.1</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
