@@ -8,7 +8,7 @@
   <tlib-version>1.0</tlib-version>
   <jsp-version>1.2</jsp-version>
   <short-name>custom-taglib</short-name>
-  <uri>http://jsptest.sf.net/taglib</uri>
+  <uri>http://github.com/jsptest/jsptest/taglib</uri>
   <description>taglib example</description>
 
   <tag>

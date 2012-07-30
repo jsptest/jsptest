@@ -1,5 +1,5 @@
 <%@ page language="Java" %>
-<%@ taglib uri="http://jsptest.sf.net/taglib" prefix="custom" %>
+<%@ taglib uri="http://github.com/jsptest/jsptest/taglib" prefix="custom" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <html>
   <body>
