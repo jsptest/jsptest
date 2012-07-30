@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <groupId>net.sf.jsptest</groupId>
+    <artifactId>jsptest</artifactId>
+    <version>0.21-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>jsptest-generic</artifactId>
+  <version>0.21-SNAPSHOT</version>
+  <name>JspTest root project for the generic components</name>
+  <description>This POM acts as a virtual root for the set of generic components that make up JspTest.</description>
+  <packaging>pom</packaging>
+  <modules>
+    <module>jsptest-common</module>
+    <module>jsptest-compiler-api</module>
+    <module>jsptest-framework</module>
+  </modules>
+  <dependencies>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>jtidy</artifactId>
+      <version>r8-20060801</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.2</version>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.13</version>
+    </dependency>
+    <dependency>
+      <groupId>jaxen</groupId>
+      <artifactId>jaxen</artifactId>
+      <version>1.1.1</version>
+    </dependency>
+  </dependencies>
+</project>

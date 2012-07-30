@@ -1,0 +1,34 @@
+SETTING UP JSPTEST FOR DEVELOPMENT IN ECLIPSE
+
+In order to begin developing JspTest in Eclipse, you need to perform the
+following two steps:
+
+1. Generate the Eclipse project files
+
+  The Eclipse project files (.project and .classpath) are not kept in
+  version control. You can let Maven generate those files for you by 
+  executing the following command in the console/command prompt from 
+  the checked out root directory: 
+
+  $ mvn eclipse:eclipse
+
+2. Generate the M2_REPO classpath variable
+
+  The Maven Eclipse plugin generates the .classpath file with 
+  references to a classpath variable named "M2_REPO", which doesn't 
+  exist by default so you need to create it by executing the following
+  command:
+
+  $ mvn -Declipse.workspace=<path-to-eclipse-workspace> eclipse:add-maven-repo
+
+3. Import the JspTest modules as separate projects 
+
+  JspTest is organized as a multi-module Maven project, which means that
+  we'll have one Eclipse project per module. In order to import the 
+  modules as regular Java projects into Eclipse, perform the following 
+  steps in Eclipse:
+
+  * Import > Existing Projects into Workspace
+  * Type the checked-out root directory and click "Refresh"
+  * Select all listed jsptest-* projects and click "Finish"
+

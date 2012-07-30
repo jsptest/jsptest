@@ -1,0 +1,14 @@
+2006-04-04 Lasse Koskela:
+- Eclipse JDT compiler implementation
+
+2006-04-04 Lasse Koskela:
+- Application scope attributes
+
+2007-05-24 Lasse Koskela:
+- Java 6 Compiler API implementation
+
+2007-07-05 Lasse Koskela:
+- Support for multiple spec versions
+-- Servlet 2.3/JSP 1.2 (Tomcat 4.1.36)
+-- Servlet 2.4/JSP 2.0 (Tomcat 5.5.23)
+-- Servlet 2.5/JSP 2.1 (Tomcat 6.0.13)

@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+    version="2.4">
+
+<!--
+    <context-param>
+        <param-name>javax.faces.CONFIG_FILES</param-name>
+        <param-value>
+            /WEB-INF/faces-config.xml
+        </param-value>
+        <description>
+            Comma separated list of URIs of (additional) faces config files.
+            (e.g. /WEB-INF/my-config.xml)
+            See JSF 1.0 PRD2, 10.3.2
+        </description>
+    </context-param>
+
+    <context-param>
+        <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+        <param-value>client</param-value>
+        <description>
+            State saving method: "client" or "server" (= default)
+            See JSF Specification 2.5.2
+        </description>
+    </context-param>
+
+    <context-param>
+        <param-name>org.apache.myfaces.ALLOW_JAVASCRIPT</param-name>
+        <param-value>true</param-value>
+        <description>
+            This parameter tells MyFaces if javascript code should be allowed in the
+            rendered HTML output.
+            If javascript is allowed, command_link anchors will have javascript code
+            that submits the corresponding form.
+            If javascript is not allowed, the state saving info and nested parameters
+            will be added as url parameters.
+            Default: "true"
+        </description>
+    </context-param>
+
+    <context-param>
+        <param-name>org.apache.myfaces.PRETTY_HTML</param-name>
+        <param-value>true</param-value>
+        <description>
+            If true, rendered HTML code will be formatted, so that it is "human readable".
+            i.e. additional line separators and whitespace will be written, that do not
+            influence the HTML code.
+            Default: "true"
+        </description>
+    </context-param>
+
+    <context-param>
+        <param-name>org.apache.myfaces.DETECT_JAVASCRIPT</param-name>
+        <param-value>false</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>org.apache.myfaces.AUTO_SCROLL</param-name>
+        <param-value>true</param-value>
+        <description>
+            If true, a javascript function will be rendered that is able to restore the
+            former vertical scroll on every request. Convenient feature if you have pages
+            with long lists and you do not want the browser page to always jump to the top
+            if you trigger a link or button action that stays on the same page.
+            Default: "false"
+        </description>
+    </context-param>
+
+    <listener>
+        <listener-class>org.apache.myfaces.webapp.StartupServletContextListener</listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.faces</url-pattern>
+    </servlet-mapping>
+-->
+
+  <!-- standard taglibs -->
+  <taglib>
+    <taglib-uri>http://java.sun.com/jstl/fmt</taglib-uri>
+    <taglib-location>/WEB-INF/fmt.tld</taglib-location>
+  </taglib>
+
+  <taglib>
+    <taglib-uri>http://java.sun.com/jstl/fmt-rt</taglib-uri>
+    <taglib-location>/WEB-INF/fmt-rt.tld</taglib-location>
+  </taglib>
+
+  <taglib>
+    <taglib-uri>http://java.sun.com/jstl/core</taglib-uri>
+    <taglib-location>/WEB-INF/c.tld</taglib-location>
+  </taglib>
+
+  <taglib>
+    <taglib-uri>http://java.sun.com/jstl/core-rt</taglib-uri>
+    <taglib-location>/WEB-INF/c-rt.tld</taglib-location>
+  </taglib>
+
+  <taglib>
+    <taglib-uri>http://java.sun.com/jstl/sql</taglib-uri>
+    <taglib-location>/WEB-INF/sql.tld</taglib-location>
+  </taglib>
+
+  <taglib>
+    <taglib-uri>http://java.sun.com/jstl/sql-rt</taglib-uri>
+    <taglib-location>/WEB-INF/sql-rt.tld</taglib-location>
+  </taglib>
+
+  <taglib>
+    <taglib-uri>http://java.sun.com/jstl/x</taglib-uri>
+    <taglib-location>/WEB-INF/x.tld</taglib-location>
+  </taglib>
+
+  <taglib>
+    <taglib-uri>http://java.sun.com/jstl/x-rt</taglib-uri>
+    <taglib-location>/WEB-INF/x-rt.tld</taglib-location>
+  </taglib>
+  
+    <!-- custom taglibs -->
+    <taglib>
+      <taglib-uri>http://jsptest.sf.net/taglib</taglib-uri>
+      <taglib-location>/WEB-INF/custom-taglib.tld</taglib-location>
+    </taglib>
+
+    <!-- Welcome files -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+</web-app>

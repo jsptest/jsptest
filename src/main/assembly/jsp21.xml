@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<assembly>
+  <id>jsp21-bin</id>
+  <formats>
+    <format>zip</format>
+  </formats>
+  <moduleSets>
+    <moduleSet>
+      <includes>
+        <include>net.sf.jsptest:jsptest-common</include>
+        <include>net.sf.jsptest:jsptest-framework</include>
+        <include>net.sf.jsptest:jsptest-compiler-api</include>
+        <include>net.sf.jsptest:jsptest-jsp21</include>
+      </includes>
+      <binaries>
+        <outputDirectory>/</outputDirectory>
+        <unpack>false</unpack>
+        <includeDependencies>true</includeDependencies>
+      </binaries>
+    </moduleSet>
+  </moduleSets>
+  <fileSets>
+    <fileSet>
+      <includes>
+        <include>README*</include>
+        <include>LICENSE*</include>
+        <include>NOTICE*</include>
+        <include>INSTALL*</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+</assembly>
