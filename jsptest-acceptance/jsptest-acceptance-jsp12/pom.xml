@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<parent><groupId>com.github.lkoskela.jsptest</groupId>
+	<parent>
 		<groupId>com.github.lkoskela.jsptest</groupId>
 		<artifactId>jsptest-acceptance</artifactId>
 		<version>0.21-SNAPSHOT</version>
