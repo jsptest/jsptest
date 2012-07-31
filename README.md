@@ -11,7 +11,7 @@ JspTest is hosted at GitHub and is being distributed through the official Maven 
       <version>VERSION</version>
     </dependency>
 
-...where _VERSION_ should be replaced by whatever is the latest version number available in the [central Maven repository](central.maven.org/maven2/com/github/jsptest/).
+...where _VERSION_ should be replaced by whatever is the latest version number available in the [central Maven repository](http://central.maven.org/maven2/com/github/jsptest/).
 
 There's a full example of a POM file for a Maven project over [here](https://github.com/jsptest/jsptest/blob/master/jsptest-samples/jsptest-samples-jsp20/pom.xml).
 
