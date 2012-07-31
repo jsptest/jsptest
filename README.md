@@ -3,6 +3,20 @@ JspTest
 
 JspTest is a JUnit 3 extension for testing JavaServer Pages (JSP) outside a J2EE container. Internally, it uses the Jasper JSP compiler from the Jakarta Tomcat project and the Java compiler distributed as part of the system's default JDK.
 
+In short, JspTest lets you write unit tests like this:
+
+    public class BasicJspTest extends HtmlTestCase {
+    
+        protected String getWebRoot() {
+            return "src/test/resources/websrc";
+        }
+    
+        public void testRenderingTrivialJsp() throws Exception {
+            get("/index.jsp");
+            output().shouldContain("Hello from Jasper");
+        }
+    }
+
 JspTest is hosted at GitHub and is being distributed through the official Maven repository. The easiest way to get it into use (provided that you're using [Maven](http://maven.apache.org/)) is to add the following dependency to your POM file:
 
     <dependency>
