@@ -2,7 +2,7 @@
 	<parent>
 		<groupId>com.github.lkoskela.jsptest</groupId>
 		<artifactId>jsptest</artifactId>
-		<version>0.21</version>
+		<version>0.22-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>jsptest-jsp12</artifactId>
