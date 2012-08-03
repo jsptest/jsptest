@@ -3,11 +3,11 @@
   <parent>
     <groupId>com.github.lkoskela.jsptest</groupId>
     <artifactId>jsptest</artifactId>
-    <version>0.21-SNAPSHOT</version>
+    <version>0.21</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>jsptest-generic</artifactId>
-  <version>0.21-SNAPSHOT</version>
+  <version>0.21</version>
   <name>JspTest root project for the generic components</name>
   <description>This POM acts as a virtual root for the set of generic components that make up JspTest.</description>
   <packaging>pom</packaging>

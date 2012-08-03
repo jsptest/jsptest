@@ -8,7 +8,7 @@
 	</parent>
 	<groupId>com.github.lkoskela.jsptest</groupId>
 	<artifactId>jsptest</artifactId>
-	<version>0.21-SNAPSHOT</version>
+	<version>0.21</version>
 	<name>JspTest root project</name>
 	<description>This POM acts as a virtual root for the set of JSP version-specific combinations of the contained subprojects.</description>
 	<packaging>pom</packaging>
