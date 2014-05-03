@@ -18,12 +18,15 @@ package net.sf.jsptest;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+
 import junit.framework.TestCase;
 import net.sf.jsptest.assertion.OutputAssertion;
 import net.sf.jsptest.compiler.api.Jsp;
+import net.sf.jsptest.compiler.api.JspCompilationContext;
 import net.sf.jsptest.compiler.api.JspCompiler;
 import net.sf.jsptest.compiler.api.JspCompilerFactory;
 import net.sf.jsptest.compiler.api.JspExecution;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -148,11 +151,13 @@ public abstract class JspTestCase extends TestCase {
     protected void request(String path, String httpMethod) throws Exception {
         validatePath(path);
         JspCompiler compiler = JspCompilerFactory.newInstance();
+        JspCompilationContext compilationContext = new JspCompilationContext(compiler, this.substituteTaglibs);
         log.debug("Using compiler " + compiler.getClass().getName() + " and webroot "
                 + new File(getWebRoot()).getAbsolutePath());
         compiler.setWebRoot(getWebRoot());
         compiler.setOutputDirectory(getOutputDirectory());
         Jsp jsp = compiler.compile(path, substituteTaglibs);
+        jsp.setCompilationContext(compilationContext);
         log.debug("Simulating a request to " + path);
         execution = jsp.request(httpMethod, requestAttributes, sessionAttributes, requestParameters);
     }

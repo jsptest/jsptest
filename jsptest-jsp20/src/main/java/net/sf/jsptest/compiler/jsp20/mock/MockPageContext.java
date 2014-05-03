@@ -39,10 +39,6 @@ public class MockPageContext extends PageContext {
     private Object page;
     private ExpressionEvaluator expressionEvaluator;
 
-    public MockPageContext() {
-        this(new MockHttpServletRequest());
-    }
-
     public MockPageContext(ServletRequest servletRequest) {
         // TODO: should the constructor invoke initialize(...) instead?
         this.request = servletRequest;

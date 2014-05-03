@@ -9,4 +9,8 @@ import java.util.Map;
 public interface Jsp {
 
     JspExecution request(String httpMethod, Map requestAttributes, Map sessionAttributes, Map requestParameters);
+    
+    void include(JspExecutionContext context);
+    
+    void setCompilationContext(JspCompilationContext compilationContext);
 }

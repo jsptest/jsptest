@@ -11,7 +11,9 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.JspFactory;
 
 import net.sf.jsptest.compiler.api.Jsp;
+import net.sf.jsptest.compiler.api.JspCompilationContext;
 import net.sf.jsptest.compiler.api.JspExecution;
+import net.sf.jsptest.compiler.api.JspExecutionContext;
 import net.sf.jsptest.compiler.jsp20.mock.MockHttpServletRequest;
 import net.sf.jsptest.compiler.jsp20.mock.MockHttpServletResponse;
 import net.sf.jsptest.compiler.jsp20.mock.MockHttpSession;
@@ -33,9 +35,14 @@ public class JspImpl implements Jsp {
 	private static final Log log = LogFactory.getLog(JspImpl.class);
 	private final Class servletClass;
 	private MockPageContext pageContext;
+	private JspCompilationContext compilationContext;
 
 	public JspImpl(Class servletClass) {
 		this.servletClass = servletClass;
+	}
+	
+	public void setCompilationContext(JspCompilationContext compilationContext) {
+		this.compilationContext = compilationContext;
 	}
 
 	public JspExecution request(String httpMethod, Map requestAttributes,
@@ -48,8 +55,19 @@ public class JspImpl implements Jsp {
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		MockJspWriter jspWriter = configureJspFactory(servletContext, request,
 				session);
-		initializeAndInvokeJsp(servletClass, servletConfig, request, response);
+		JspExecutionContextImpl executionContext = new JspExecutionContextImpl(servletConfig, pageContext, request, response);
+		request.setExecutionContext(executionContext);
+		
+		initializeAndInvokeJsp(servletClass, executionContext);
 		return createExecutionResult(jspWriter.getContents());
+	}
+	
+	public void include(JspExecutionContext context) {
+		initializeAndInvokeJsp(servletClass, context);
+	}
+	
+	protected void initializeAndInvokeJsp(Class jspClass, JspExecutionContext context) {
+		context.initializeAndInvoke(jspClass, this);
 	}
 
 	private MockHttpSession configureHttpSession(Map sessionAttributes) {
@@ -61,7 +79,7 @@ public class JspImpl implements Jsp {
 	private MockHttpServletRequest configureHttpServletRequest(
 			String httpMethod, Map requestAttributes, Map requestParameters,
 			MockHttpSession session) {
-		MockHttpServletRequest request = new MockHttpServletRequest();
+		MockHttpServletRequest request = new MockHttpServletRequest(compilationContext);
 		request.setSession(session);
 		request.setMethod(httpMethod);
 		request.setAttributes(requestAttributes);
@@ -81,8 +99,7 @@ public class JspImpl implements Jsp {
 	private MockPageContext configurePageContext(ServletContext httpContext,
 			HttpServletRequest httpRequest, HttpSession httpSession,
 			MockJspWriter jspWriter) {
-		MockPageContext pageContext = new MockPageContext();
-		pageContext.setRequest(httpRequest);
+		MockPageContext pageContext = new MockPageContext(httpRequest);
 		pageContext.setServletContext(httpContext);
 		pageContext.setSession(httpSession);
 		pageContext.setJspWriter(jspWriter);
