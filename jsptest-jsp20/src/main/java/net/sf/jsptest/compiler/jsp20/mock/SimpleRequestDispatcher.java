@@ -31,7 +31,13 @@ public class SimpleRequestDispatcher implements RequestDispatcher {
 	public void include(ServletRequest request, ServletResponse response)
 			throws ServletException, IOException {
 		Jsp jsp = compilationContext.getCompiler().compile(path, compilationContext.getSubstituteTaglibs());
+		MockHttpServletRequest mockReq = (MockHttpServletRequest) request;
+		String oldValue = (String) mockReq.getAttribute("javax.servlet.include.servlet_path");
+		String newValue = RequestHelper.getInclusionPath(path);
+		mockReq.setAttribute("javax.servlet.include.servlet_path", newValue);
 		jsp.include(executionContext);
+		mockReq.setAttribute("javax.servlet.include.servlet_path", oldValue);
 	}
-
+	
+	
 }

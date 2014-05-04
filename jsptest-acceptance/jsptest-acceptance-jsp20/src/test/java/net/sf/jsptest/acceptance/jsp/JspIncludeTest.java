@@ -20,4 +20,12 @@ public class JspIncludeTest extends JspTestCase {
 		output().shouldContain("Content from container JSP");
 		output().shouldContain("Content from included JSP");
 	}
+	
+	public void testRenderingJspWithNestedJspRelativeInclusion() throws Exception {
+		get("/include/container_nested.jsp");
+		output().shouldContain("Content from container JSP");
+		output().shouldContain("Content from first included JSP");
+		output().shouldContain("Content from sub included JSP");
+		output().shouldContain("Content from last included JSP");
+	}
 }
