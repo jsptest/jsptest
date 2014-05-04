@@ -159,10 +159,19 @@ public abstract class JspTestCase extends TestCase {
         Jsp jsp = compiler.compile(path, substituteTaglibs);
         jsp.setCompilationContext(compilationContext);
         log.debug("Simulating a request to " + path);
+        requestAttributes.put("javax.servlet.include.servlet_path", getInclusionPath(path));
         execution = jsp.request(httpMethod, requestAttributes, sessionAttributes, requestParameters);
     }
 
-    private void validatePath(String path) {
+    private String getInclusionPath(String path) {
+    	String result = path;
+    	if(path.lastIndexOf('/') >= 0) {
+    		result = path.substring(0, path.lastIndexOf('/') + 1);
+    	}
+		return result;
+	}
+
+	private void validatePath(String path) {
         if (!path.startsWith("/")) {
             throw new IllegalArgumentException("The JSP path must start with a \"/\"");
         }

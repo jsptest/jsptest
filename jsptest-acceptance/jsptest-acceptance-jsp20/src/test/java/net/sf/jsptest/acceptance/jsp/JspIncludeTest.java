@@ -9,8 +9,14 @@ public class JspIncludeTest extends JspTestCase {
         return "src/test/resources/websrc";
     }
 	
-	public void testRenderingJspWithJspInclusion() throws Exception {
+	public void testRenderingJspWithJspAbsoluteInclusion() throws Exception {
 		get("/include/container.jsp");
+		output().shouldContain("Content from container JSP");
+		output().shouldContain("Content from included JSP");
+	}
+	
+	public void testRenderingJspWithJspRelativeInclusion() throws Exception {
+		get("/include/container_rel.jsp");
 		output().shouldContain("Content from container JSP");
 		output().shouldContain("Content from included JSP");
 	}
