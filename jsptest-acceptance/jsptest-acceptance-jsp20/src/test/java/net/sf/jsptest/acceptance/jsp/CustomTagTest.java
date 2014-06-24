@@ -30,6 +30,12 @@ public class CustomTagTest extends JspTestCase {
         get("/taglibs/custom-taglib.jsp");
         output().shouldContain("This content is coming from CustomTag");
     }
+    
+    public void testRenderingJspUsingCustomTaglibsInTagDir() throws Exception {
+    	get("/taglibs/custom-taglib-in-tag-dir.jsp");
+    	System.out.println(getRenderedResponse());
+    	output().shouldContain("This content is coming from custom tag file");
+    }
 
     public void testTaglibAttributes() throws Exception {
         get("/taglibs/custom-taglib.jsp");

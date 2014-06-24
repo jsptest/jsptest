@@ -1,7 +1,11 @@
 package net.sf.jsptest.compiler.jsp20;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.Map;
+
 import net.sf.jsptest.compiler.JspCompilationInfo;
 import net.sf.jsptest.compiler.api.Jsp;
 import net.sf.jsptest.compiler.api.JspCompiler;
@@ -52,7 +56,12 @@ public class JspCompilerImpl implements JspCompiler {
     }
 
     private Class loadJspClass(String jspClassName) throws ClassNotFoundException {
-        ClassLoader cl = new CustomClassLoader(getOutputDirectory());
-        return cl.loadClass(jspClassName);
+    	try {
+			URLClassLoader cl = new URLClassLoader(new URL[] {new File(System.getProperty("java.io.tmpdir")).toURI().toURL(), new File(getOutputDirectory()).toURI().toURL()});
+			return cl.loadClass(jspClassName);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+    	throw new ClassNotFoundException(jspClassName);
     }
 }

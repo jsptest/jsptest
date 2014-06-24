@@ -333,6 +333,7 @@ public class JasperCompiler {
         cp.addContainer(org.apache.jasper.runtime.HttpJspBase.class);
         cp.add(new File("target", "test-classes").getAbsolutePath());
         cp.add(new File("target", "classes").getAbsolutePath());
+        cp.add(new File(System.getProperty("java.io.tmpdir")));
         return cp.toStringArray();
     }
 
