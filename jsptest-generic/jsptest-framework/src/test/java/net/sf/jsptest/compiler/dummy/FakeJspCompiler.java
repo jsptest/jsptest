@@ -1,9 +1,12 @@
 package net.sf.jsptest.compiler.dummy;
 
 import java.util.Map;
+
 import net.sf.jsptest.compiler.api.Jsp;
+import net.sf.jsptest.compiler.api.JspCompilationContext;
 import net.sf.jsptest.compiler.api.JspCompiler;
 import net.sf.jsptest.compiler.api.JspExecution;
+import net.sf.jsptest.compiler.api.JspExecutionContext;
 
 /**
  * @author Lasse Koskela
@@ -37,6 +40,9 @@ public class FakeJspCompiler implements JspCompiler {
         lastCompiledWebRoot = getWebRoot();
         lastCompiledPath = path;
         return new Jsp() {
+        	
+        	 public void include(JspExecutionContext context) {
+        	 }
 
             public JspExecution request(String httpMethod, Map requestAttributes,
                     Map sessionAttributes, Map requestParameters) {
@@ -47,6 +53,10 @@ public class FakeJspCompiler implements JspCompiler {
                     }
                 };
             }
+
+			public void setCompilationContext(
+					JspCompilationContext compilationContext) {
+			}
         };
     }
 

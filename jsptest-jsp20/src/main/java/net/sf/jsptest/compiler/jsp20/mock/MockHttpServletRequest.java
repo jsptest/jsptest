@@ -46,6 +46,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import net.sf.jsptest.compiler.api.JspCompilationContext;
+import net.sf.jsptest.compiler.api.JspExecutionContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -61,6 +64,8 @@ public class MockHttpServletRequest implements HttpServletRequest {
 	private Map parameters = new HashMap();
 	private Map attributes = new HashMap();
 	private MockHttpSession httpSession = null;
+	private JspCompilationContext compilationContext;
+	private JspExecutionContext executionContext;
 	private byte[] body;
 	private String httpMethod;
 	private String characterEncoding;
@@ -75,19 +80,20 @@ public class MockHttpServletRequest implements HttpServletRequest {
 	static final SimpleDateFormat RFC2616 = new SimpleDateFormat(
 			"EEE, dd MMM yyyy HH:mm:ss z");
 
-	public MockHttpServletRequest() {
-		this((MockHttpSession) null);
+	public MockHttpServletRequest(JspCompilationContext compilationContext) {
+		this(compilationContext, (MockHttpSession) null);
 	}
 
-	public MockHttpServletRequest(byte[] body) {
-		this((MockHttpSession) null, body);
+	public MockHttpServletRequest(JspCompilationContext compilationContext, byte[] body) {
+		this(compilationContext, (MockHttpSession) null, body);
 	}
 
-	public MockHttpServletRequest(MockHttpSession httpSession) {
-		this(httpSession, null);
+	public MockHttpServletRequest(JspCompilationContext compilationContext, MockHttpSession httpSession) {
+		this(compilationContext, httpSession, null);
 	}
 
-	public MockHttpServletRequest(MockHttpSession httpSession, byte[] body) {
+	public MockHttpServletRequest(JspCompilationContext compilationContext, MockHttpSession httpSession, byte[] body) {
+		this.compilationContext = compilationContext;
 		setSession(httpSession);
 		setScheme("http");
 		setContextPath("");
@@ -505,17 +511,8 @@ public class MockHttpServletRequest implements HttpServletRequest {
 		return new Vector(locales).elements();
 	}
 
-	public RequestDispatcher getRequestDispatcher(String path) {
-		return new RequestDispatcher() {
-
-			public void forward(ServletRequest request, ServletResponse response)
-					throws ServletException, IOException {
-			}
-
-			public void include(ServletRequest request, ServletResponse response)
-					throws ServletException, IOException {
-			}
-		};
+	public RequestDispatcher getRequestDispatcher(final String path) {
+		return new SimpleRequestDispatcher(path, compilationContext, executionContext);
 	}
 
 	public String getRealPath(String path) {
@@ -605,5 +602,9 @@ public class MockHttpServletRequest implements HttpServletRequest {
 
 	private boolean isPostRequest() {
 		return "POST".equals(getMethod());
+	}
+	
+	public void setExecutionContext(JspExecutionContext executionContext) {
+		this.executionContext = executionContext;
 	}
 }

@@ -25,8 +25,8 @@ public class TestMockHttpServletRequest extends TestCase {
 
 	protected void setUp() throws Exception {
 		body = "body".getBytes();
-		get = new MockHttpServletRequest();
-		post = new MockHttpServletRequest(body);
+		get = new MockHttpServletRequest(null);
+		post = new MockHttpServletRequest(null, body);
 		post.setMethod("POST");
 	}
 

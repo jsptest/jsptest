@@ -35,4 +35,10 @@ public class RequestParameterTest extends JspTestCase {
         output().shouldContain("request parameter: 'Rn2'='Rv2'");
         output().shouldContain("request parameter: 'Rn3'='Rv3a','Rv3b'");
     }
+    
+    public void testRequestParametersUsingEL() throws Exception {
+    	setRequestParameter("Rn0", "Rv0");
+    	get("/echo_parameters_el.jsp");
+        output().shouldContain("request parameter: 'Rn0'='Rv0'");
+    }
 }

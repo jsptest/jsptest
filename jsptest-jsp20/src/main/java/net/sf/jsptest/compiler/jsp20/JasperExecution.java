@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -27,8 +28,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.JspFactory;
+
 import junit.framework.TestCase;
 import net.sf.jsptest.compiler.JspCompilationInfo;
+import net.sf.jsptest.compiler.api.JspCompilationContext;
+import net.sf.jsptest.compiler.api.JspCompiler;
 import net.sf.jsptest.compiler.jsp20.mock.MockHttpServletRequest;
 import net.sf.jsptest.compiler.jsp20.mock.MockHttpServletResponse;
 import net.sf.jsptest.compiler.jsp20.mock.MockHttpSession;
@@ -151,7 +155,7 @@ public abstract class JasperExecution extends TestCase {
         ServletConfig servletConfig = new MockServletConfig(servletContext);
         MockHttpSession httpSession = new MockHttpSession();
         httpSession.setAttributes(sessionAttributes);
-        MockHttpServletRequest request = new MockHttpServletRequest();
+        MockHttpServletRequest request = new MockHttpServletRequest(new JspCompilationContext(getJspCompiler(), mockTaglibs));
         request.setSession(httpSession);
         request.setMethod(httpMethod);
         request.setAttributes(requestAttributes);
@@ -160,11 +164,17 @@ public abstract class JasperExecution extends TestCase {
         initializeAndInvokeJsp(jspClass, servletConfig, request, response);
         writeOutputToTempFile(jspWriter.getContents());
     }
+    
+    private JspCompiler getJspCompiler() {
+		JspCompilerImpl jspCompiler = new JspCompilerImpl();
+	    jspCompiler.setOutputDirectory(getClassOutputBaseDir());
+	    jspCompiler.setWebRoot(getWebRoot());
+		return jspCompiler;
+    }
 
     protected MockJspWriter configureJspFactory(ServletContext httpContext,
             HttpServletRequest httpRequest, HttpSession httpSession) {
-        pageContext = new MockPageContext();
-        pageContext.setRequest(httpRequest);
+        pageContext = new MockPageContext(httpRequest);
         pageContext.setServletContext(httpContext);
         pageContext.setSession(httpSession);
         MockJspWriter jspWriter = new MockJspWriter();
